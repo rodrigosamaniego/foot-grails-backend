@@ -16,8 +16,8 @@ exports.create = async (req, res) => {
 
 const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
 if(!regex.test(password)){
-    res.render("signup-user", {
-        errorMessage:"Tu password debe contener 6 caracteres, minimo un numero y una mayuscula."
+    res.json( {
+        errorMessage:"Error creating your account"
     })
     return
 }
@@ -54,7 +54,7 @@ try{
             if (error) throw error
 
             res.json({
-                msg:"Token created",
+                
                 data: token
             })
         }
@@ -62,8 +62,8 @@ try{
 
     }catch(error ){
 
-    res.status(500).json({
-        msg: "Error creating user",
+    res.json({
+        errorMessage: "Error creating user",
         error: error
     })
     }
